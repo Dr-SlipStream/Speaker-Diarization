@@ -6,7 +6,7 @@ This repository provides a **Speaker Diarization** system using **Whisper** for 
 - **Speaker Diarization**: Identify and separate speakers in an audio file.
 - **Transcription**: Convert speech to text using OpenAI's Whisper model.
 - **Environment Variable Support**: Uses `.env` file to securely store the Hugging Face authentication token.
-- **Easy Installation**: Install dependencies from `readme_docs/`.
+- **Single-Step Processing**: Run a single script to process audio and generate a speaker-labeled transcript.
 
 ---
 ## 🚀 Installation & Setup
@@ -18,10 +18,17 @@ cd Speaker-Diarization
 ```
 
 ### 2️⃣ Install Dependencies
-Check the `readme_docs/` folder for a detailed dependency installation guide.
+Ensure Python 3.11.x (preferably 3.11.9) is installed.
 
-**Additionally, install `python-dotenv` for `.env` support:**
+#### **Check Python Version**
 ```sh
+python --version
+```
+If another version is installed, uninstall it and install Python 3.11.9.
+
+#### **Install Required Packages**
+```sh
+pip install -r requirements.txt
 pip install python-dotenv
 ```
 
@@ -35,26 +42,28 @@ Edit `.env` and add your Hugging Face token:
 HF_TOKEN=your_hugging_face_token_here
 ```
 
+To get a Hugging Face token:
+1. Go to [Hugging Face](https://huggingface.co/)
+2. Sign in and navigate to your profile settings.
+3. Generate an API token under 'Access Tokens'.
+
 ---
 ## 📜 Usage
 
 ### 🔹 Running `complete_file.py`
 To process an audio file, run:
 ```sh
-python complete_file.py 2p_short.wav
+python complete_file.py <audio_file>
 ```
-Replace `2p_short.wav` with your own audio file.
+Replace `<audio_file>` with your actual file.
 
-### 🔹 Running Other Scripts
-- `diarization_pyannote.py`: Performs speaker diarization using other files in the folder.
-- `single_file.py`: Runs transcription and diarization on a single file.
-
-All scripts automatically use the Hugging Face token from `.env`.
+### 🔹 Output
+The final transcript is saved as:
+```sh
+<audio_file_name>_transcript.txt
+```
 
 ---
 ## 📂 Documentation
 Detailed documentation is available in the `readme_docs/` folder.
-
-
-
 
