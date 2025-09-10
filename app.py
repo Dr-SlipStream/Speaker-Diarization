@@ -1,4 +1,5 @@
 import streamlit as st
+import sys
 import subprocess
 import os
 import shutil
@@ -28,10 +29,14 @@ if uploaded_file is not None:
     # Run the script when the user clicks the button
     if st.button("Process Audio"):
         with st.spinner("Processing..."):
-            result = subprocess.run(["python", "complete_file.py", audio_path], capture_output=True, text=True)
+            result = subprocess.run([sys.executable, "complete_file.py", audio_path], capture_output=True, text=True)
 
         if result.returncode == 0:
             st.success("Processing complete! Transcript generated.")
+
+            # Show logs (stdout + stderr)
+            logs = (result.stdout or "") + "\n" + (result.stderr or "")
+            st.text_area("Logs:", logs, height=200)
 
             # Get filename without extension
             file_base_name = os.path.splitext(uploaded_file.name)[0]
@@ -45,7 +50,14 @@ if uploaded_file is not None:
             else:
                 st.error(f"Transcript file not found at {transcript_path}")
         else:
-            st.error("Error processing the file. Check logs.")
+            st.error("Error processing the file. Check logs below:")
+            st.subheader("Error Logs")
+            st.text(result.stderr)  # shows the error output from complete_file.py
+
+            # Show logs when error happens
+            logs = (result.stdout or "") + "\n" + (result.stderr or "")
+            st.text_area("Logs:", logs, height=300)
+
 
 # Button to clear uploads folder
 if st.button("Clear Uploads Folder"):
