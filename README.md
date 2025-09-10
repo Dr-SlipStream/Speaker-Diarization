@@ -25,15 +25,13 @@ cd Speaker-Diarization
 
 ### 2. Install Dependencies
 
-Ensure Python 3.11.x (preferably 3.11.9) is installed.
+Ensure Python 3.13.x is installed.
 
 **Check Python Version**
 
 ```sh
 python --version
 ```
-
-If another version is installed, uninstall it and install Python 3.11.9.
 
 **Set Up a Virtual Environment**
 
